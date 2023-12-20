@@ -1,0 +1,20 @@
+site_name: Root docs
+repo_url: https://github.com/RoadieHQ/sample-service
+edit_uri: edit/main/docs
+
+nav:
+  - Home: index.md
+  - Local development: local-development.md
+  - Feature Testing: feature-testing.md
+  - TestDoc: test-doc.md
+  - Embedded Lucid Chart: testing-lucid.md
+  - Subdirectory docs: "!include ./sub-dir-documentation/mkdocs.yml"
+  - Runbook: runbook.md
+
+docs_dir: docs
+plugins:
+  - techdocs-core
+  - kroki
+
+markdown_extensions:
+  - markdown_inline_mermaid
