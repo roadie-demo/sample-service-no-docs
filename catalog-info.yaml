@@ -34,9 +34,10 @@ metadata:
     datadoghq.com/slo_tag: service:sample-service
     datadoghq.com/monitor_tags: sample-service
     backstage.io/code-coverage: enabled
+    bugsnag.com/project-key: RoadieHQ/ca22ff37be961bedf7b630799c915392
 spec:
   type: service
-  owner: group:roadiehq/engineering
+  owner: group:roadie-demo/engineering
   lifecycle: production
   system: sample-system
   providesApis:
@@ -44,3 +45,34 @@ spec:
   dependsOn:
     - Component:sample-service-2
     - Resource:sample-s3-bucket
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: sample-s3-bucket
+  description: The s3 bucket with the sample data in it. Doesn't really exist.
+spec:
+  type: s3-bucket
+  owner: group:roadie-demo/engineering
+  system: sample-system
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: sample-domain
+  description: Sample domain which has stuff for demoing.
+spec:
+  owner: group:roadie-demo/engineering
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  title: Sample System
+  name: sample-system
+  description: Sample things which are good for demoing.
+spec:
+  owner: group:roadie-demo/engineering
+  domain: sample-domain

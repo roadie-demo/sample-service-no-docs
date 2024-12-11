@@ -2,11 +2,13 @@ const express = require('express');
 const Sentry = require('@sentry/node');
 const Rollbar = require('rollbar');
 const get = require('lodash/get');
+const tracer = require('dd-trace').init({logInjection: true})
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const newrelic = require('newrelic');
 const Bugsnag = require('@bugsnag/js');
 const BugsnagPluginExpress = require('@bugsnag/plugin-express');
+const { faker } = require('@faker-js/faker');
 
 const app = express();
 
@@ -70,20 +72,11 @@ app.post('/debug-rollbar', function mainHandler(req, res) {
 });
 
 app.post('/debug-bugsnag', function mainHandler(req, res) {
-  const errorMsg = get(req, 'body.errorMessage', 'My first Bugsnag error!');
+  const errorMsg = get(req, 'body.errorMessage', `Caution, your selected music genre is set to ${faker.music.genre()}`);
   Bugsnag.notify(new Error(errorMsg));
 
   res.json({
     message: `Error sent to Bugsnag: "${errorMsg}"`,
-  });
-});
-
-app.post('/debug-rollbar', function mainHandler(req, res) {
-  const errorMsg = get(req, 'body.errorMessage', 'My first Rollbar error!');
-  rollbar.error(errorMsg);
-
-  res.json({
-    message: `Error sent to Rollbar: "${errorMsg}"`,
   });
 });
 
