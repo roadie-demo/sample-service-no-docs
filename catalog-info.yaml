@@ -35,6 +35,7 @@ metadata:
     datadoghq.com/monitor_tags: sample-service
     backstage.io/code-coverage: enabled
     bugsnag.com/project-key: RoadieHQ/ca22ff37be961bedf7b630799c915392
+    pagerduty.com/schedule-id: PVPDKQT
 spec:
   type: service
   owner: group:roadie-demo/engineering
